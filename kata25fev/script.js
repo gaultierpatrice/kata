@@ -6,6 +6,7 @@ const emails = [
   "lucie@domain.fr",
   "paulette@mail .com",
   "contact@entreprise.org",
+  "   gaultier      @hotmail     .   fr",
 ];
 
 function verifyEmail(emails) {
