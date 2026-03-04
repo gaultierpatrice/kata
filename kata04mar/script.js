@@ -19,7 +19,7 @@ function bookSeats(events, eventId, seats) {
     } else {
       result.sucess = true;
       result.message = `Reservation accepted for the event: ${found.title}!`;
-      result.remainingSeats = found.capacity - (found.booked + seats);
+      result.newRemainingSeats = found.capacity - (found.booked + seats);
     }
   } else {
     result.success = false;
