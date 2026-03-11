@@ -18,18 +18,13 @@ function hasConflict(meetings) {
     start = parseInt(start[0]) * 60 + parseInt(start[1]);
     let end = meeting.end.split(":");
     end = parseInt(end[0]) * 60 + parseInt(end[1]);
-    console.log({ start, end });
     return { start, end };
   }
   //  Declare variables in minutes for start and end of each meeting
   const { start: startA, end: endA } = hoursToMinutes(meetings[0]);
   const { start: startB, end: endB } = hoursToMinutes(meetings[1]);
   // Check if meeting A start after meeting B and if there's overlapse
-  if (startA < endB && startB < endA) {
-    return true;
-  } else {
-    return false;
-  }
+  return startA < endB && startB < endA;
 }
 
 console.log("hasConflict(meetings1)", hasConflict(meetings1));
