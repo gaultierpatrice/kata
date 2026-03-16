@@ -1,5 +1,3 @@
-console.log("coucou");
-
 const words = [
   " Java ",
   "java",
@@ -46,15 +44,28 @@ const words = [
 ];
 
 function countWord(words) {
+  let result = {};
   for (let i = 0; i < words.length; i++) {
-    if (!words[i] || words[i].length === 0) {
-      console.log("error");
+    const word = words[i];
+
+    if (typeof word !== "string" || word.trim().length === 0) {
+      console.log("error", word);
     } else {
-      console.log(words[i].toLowerCase().trim());
+      let cleaned = word
+        .toLowerCase()
+        .trim()
+        .replace(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, "");
+
+      if (cleaned.length === 0) {
+        console.log("error", word);
+        continue;
+      }
+
+      result[cleaned] = (result[cleaned] || 0) + 1;
     }
   }
 
-  return {};
+  return result;
 }
 
-countWord(words);
+console.log("countWord(words) :", countWord(words));
