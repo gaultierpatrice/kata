@@ -43,29 +43,24 @@ const words = [
   ".",
 ];
 
-function countWord(words) {
-  let result = {};
-  for (let i = 0; i < words.length; i++) {
-    const word = words[i];
+function sanitizeWord(word) {
+  return (
+    word
+      ?.toLowerCase()
+      .trim()
+      .replace(/[.,!?]+$/, "") || null
+  );
+}
 
-    if (typeof word !== "string" || word.trim().length === 0) {
-      console.log("error", word);
-    } else {
-      let cleaned = word
-        .toLowerCase()
-        .trim()
-        .replace(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, "");
+function accumulate(occurence, element) {
+  return { ...occurence, [element]: (occurence[element] ?? 0) + 1 };
+}
 
-      if (cleaned.length === 0) {
-        console.log("error", word);
-        continue;
-      }
-
-      result[cleaned] = (result[cleaned] || 0) + 1;
-    }
-  }
-
-  return result;
+function countWord(wordsGiven) {
+  return wordsGiven
+    .map(sanitizeWord)
+    .filter((word) => word != null)
+    .reduce(accumulate, {});
 }
 
 console.log("countWord(words) :", countWord(words));
