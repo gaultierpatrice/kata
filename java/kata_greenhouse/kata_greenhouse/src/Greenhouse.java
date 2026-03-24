@@ -1,7 +1,9 @@
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Greenhouse {
-    public Plant[] plants;
+    private Plant[] plants;
 
     public Greenhouse() {
         this.plants = new Plant[0];
@@ -16,7 +18,7 @@ public class Greenhouse {
 
     public void waterAll(int amount) {
         for(Plant plant  : plants) {
-            plant.waterLevel += amount;
+            plant.water(amount);
         }
     }
 
@@ -27,11 +29,17 @@ public class Greenhouse {
     }
 
     public Plant[] getPlantInDifficulty() {
-
-       return plants;
+        return Arrays.stream(plants).filter(plant -> plant.waterLevel < 2).toArray(Plant[]::new);
     }
 
     public Map<Plant.Status, Integer> countByStatus() {
-        return Map.of();
+        return Arrays.stream(plants).reduce(
+                new HashMap<>(Map.of(Plant.Status.seed, 0, Plant.Status.sprout, 0, Plant.Status.flower, 0)),
+                (acc, plant) -> {
+                    acc.put(plant.status, acc.get(plant.status) + 1);
+                    return acc;
+                },
+                (a, b) -> a
+        );
     }
 }

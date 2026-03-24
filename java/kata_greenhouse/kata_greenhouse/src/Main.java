@@ -14,6 +14,16 @@ void main() {
     greenhouse.waterAll(5);
     greenhouse.passDayForAll();
     greenhouse.passDayForAll();
+    greenhouse.passDayForAll();
+    greenhouse.passDayForAll();
     tulip.getSummary();
+
+    System.out.println(Arrays.toString(greenhouse.getPlantInDifficulty()));
+
+    Plant lilas = new Plant("Lilas");
+    greenhouse.addPlant(lilas);
+
+    System.out.println(greenhouse.countByStatus());
+
 
 }
